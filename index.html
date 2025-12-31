@@ -64,12 +64,14 @@
             margin-bottom: 60px;
         }
 
+        /* Large Title - Responsive */
         h1.big-title {
-            font-size: clamp(60px, 13vw, 200px); /* Slightly larger for the name */
+            font-size: clamp(50px, 13vw, 200px); 
             line-height: 0.9;
             letter-spacing: -0.04em;
             font-weight: 500;
             text-transform: uppercase;
+            word-wrap: break-word; /* Prevents overflow on tiny screens */
         }
 
         .hero-sub {
@@ -88,7 +90,6 @@
             line-height: 1.4;
         }
         
-        /* New style for the job title which is now in the sub-text */
         .job-title-highlight {
             display: block;
             font-weight: 600;
@@ -160,7 +161,7 @@
             line-height: 1.6;
         }
 
-        /* --- PROJECTS SECTION (Clickable Accordion) --- */
+        /* --- PROJECTS SECTION --- */
         .project-header-row {
             display: flex;
             justify-content: space-between;
@@ -179,6 +180,7 @@
             border-bottom: 1px solid #ccc;
             cursor: pointer;
             transition: background-color 0.3s;
+            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile tap */
         }
 
         .project-item:hover {
@@ -198,9 +200,10 @@
         }
 
         .p-title {
-            font-size: clamp(24px, 4vw, 50px);
+            font-size: clamp(20px, 4vw, 50px);
             font-weight: 400;
             margin-bottom: 10px;
+            padding-right: 15px;
         }
 
         .p-tags {
@@ -214,9 +217,10 @@
             font-size: 30px;
             color: #111;
             transition: transform 0.4s ease;
+            min-width: 30px; /* Prevents icon from squishing */
+            text-align: right;
         }
 
-        /* The hidden details part */
         .p-details {
             max-height: 0;
             overflow: hidden;
@@ -241,13 +245,12 @@
             margin-bottom: 10px;
         }
 
-        /* Active State for Project */
         .project-item.active .p-icon {
-            transform: rotate(45deg); /* Rotates the + to x */
+            transform: rotate(45deg);
         }
         
         .project-item.active .p-details {
-            max-height: 500px;
+            max-height: 1000px; /* Increased for mobile text wrapping */
             transition: max-height 0.5s ease-in-out;
         }
 
@@ -286,6 +289,7 @@
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .acc-title {
@@ -323,7 +327,7 @@
         }
 
         .footer h2 {
-            font-size: clamp(40px, 8vw, 90px);
+            font-size: clamp(36px, 8vw, 90px);
             line-height: 1;
             margin-bottom: 80px;
             max-width: 1000px;
@@ -358,13 +362,47 @@
             color: #fff;
         }
 
-        /* --- RESPONSIVE --- */
+        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 900px) {
-            .services-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 0 25px; /* Reduce padding on phones so text isn't squished */
             }
+            
+            header {
+                min-height: auto;
+                padding-bottom: 60px;
+            }
+
+            .hero-sub {
+                flex-direction: column; /* Stack description under title */
+                gap: 30px;
+            }
+            
+            .hero-desc {
+                font-size: 20px; /* Slightly smaller reading text */
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr; /* Stack services */
+            }
+            
             .edu-wrapper {
+                flex-direction: column; /* Stack education */
+                gap: 30px;
+            }
+            
+            .footer {
+                padding: 60px 25px 30px;
+            }
+            
+            .footer-bottom {
                 flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .footer-socials a {
+                margin-left: 0;
+                margin-right: 20px;
             }
         }
     </style>
@@ -379,11 +417,11 @@
             </div>
             
             <div class="hero-main">
-                <h1 class="big-title">ROHAN SUNIL<br></h1>
+                <h1 class="big-title"><br>ROHANSUNIL</h1>
                 
                 <div class="hero-sub">
                     <div class="hero-desc">
-                        <span class="job-title-highlight">(AWS Cloud & DevOps Engineer)</span>
+                        <span class="job-title-highlight">AWS Cloud & DevOps Engineer</span>
                         Deploying scalable, secure infrastructure on AWS and managing automated CI/CD pipelines.
                     </div>
                     <div class="hero-actions">
@@ -418,7 +456,7 @@
     <section class="section-padding container projects-section">
         <div class="project-header-row">
             <h2>Selected Work</h2>
-            <span>(Click to view details)</span>
+            <span>(Click/Tap to view)</span>
         </div>
 
         <div class="project-list">
@@ -445,7 +483,7 @@
                 <div class="p-header">
                     <div class="p-content-left">
                         <div class="p-title">Auto Scaling Web App</div>
-                        <span class="p-tags">Load Balancer, ASG, High Availability</span>
+                        <span class="p-tags">Load Balancer, ASG, HA</span>
                     </div>
                     <div class="p-icon">+</div>
                 </div>
@@ -480,7 +518,7 @@
                 <div class="p-header">
                     <div class="p-content-left">
                         <div class="p-title">Serverless File Tracker</div>
-                        <span class="p-tags">Lambda, DynamoDB, S3, CloudWatch</span>
+                        <span class="p-tags">Lambda, DynamoDB, S3</span>
                     </div>
                     <div class="p-icon">+</div>
                 </div>
@@ -497,7 +535,7 @@
                 <div class="p-header">
                     <div class="p-content-left">
                         <div class="p-title">Dockerized Deployment</div>
-                        <span class="p-tags">Docker Compose, Containers, CI/CD</span>
+                        <span class="p-tags">Docker, Containers, CI/CD</span>
                     </div>
                     <div class="p-icon">+</div>
                 </div>
@@ -563,27 +601,40 @@
     </footer>
 
     <script>
-        // --- PROJECTS ACCORDION LOGIC ---
-        const projectItems = document.querySelectorAll('.project-item');
+        // --- ACCORDION LOGIC (Works on Touch & Click) ---
+        
+        // Helper function to handle accordion toggles
+        function toggleAccordion(element, contentClass) {
+            const content = element.nextElementSibling;
+            
+            // Toggle active class
+            element.parentElement.classList.toggle('active');
 
+            // Adjust Height
+            if (element.parentElement.classList.contains('active')) {
+                content.style.maxHeight = content.scrollHeight + "px";
+            } else {
+                content.style.maxHeight = 0;
+            }
+        }
+
+        // Projects
+        const projectItems = document.querySelectorAll('.project-item');
         projectItems.forEach(item => {
-            // Listen for click on the whole item header area
             item.addEventListener('click', () => {
                 const details = item.querySelector('.p-details');
                 
-                // Toggle active class
+                // Toggle active
                 item.classList.toggle('active');
 
-                // Adjust Height for smooth transition
+                // Animate height
                 if (item.classList.contains('active')) {
-                    // Set height to content height
                     details.style.maxHeight = details.scrollHeight + "px";
                 } else {
-                    // Reset to 0
                     details.style.maxHeight = 0;
                 }
 
-                // Optional: Close other projects when one opens (Accordion style)
+                // Close others (Optional, keeps it clean on mobile)
                 projectItems.forEach(otherItem => {
                     if (otherItem !== item && otherItem.classList.contains('active')) {
                         otherItem.classList.remove('active');
@@ -593,16 +644,14 @@
             });
         });
 
-        // --- EDUCATION ACCORDION LOGIC ---
+        // Education
         const eduHeaders = document.querySelectorAll('.accordion-header');
-
         eduHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 const item = header.parentElement;
                 const content = header.nextElementSibling;
                 
                 item.classList.toggle('active');
-
                 if (item.classList.contains('active')) {
                     content.style.maxHeight = content.scrollHeight + "px";
                 } else {
@@ -612,6 +661,5 @@
         });
     </script>
 </body>
-
 </html>
 
