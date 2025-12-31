@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohan Sunil - DevOps Portfolio</title>
+    <style>
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #111;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-top: 40px;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .hero-main {
+            margin-bottom: 60px;
+        }
+
+        h1.big-title {
+            font-size: clamp(60px, 13vw, 200px); /* Slightly larger for the name */
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .hero-sub {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.4;
+        }
+        
+        /* New style for the job title which is now in the sub-text */
+        .job-title-highlight {
+            display: block;
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: #111;
+            color: #fff;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            margin-right: 20px;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-bottom: 1px solid transparent;
+            transition: border 0.3s;
+        }
+
+        .social-links a:hover {
+            border-bottom: 1px solid #111;
+        }
+
+        /* --- SERVICES GRID --- */
+        .services-header {
+            font-size: clamp(30px, 4vw, 50px);
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            border-top: 1px solid #ccc;
+            padding-top: 40px;
+        }
+
+        .service-item h3 {
+            font-size: 60px;
+            color: #ccc;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .service-item h4 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .service-item p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* --- PROJECTS SECTION (Clickable Accordion) --- */
+        .project-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #111;
+            padding-bottom: 20px;
+        }
+
+        .project-header-row h2 {
+            font-size: clamp(30px, 4vw, 50px);
+            font-weight: 400;
+        }
+
+        .project-item {
+            border-bottom: 1px solid #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .project-item:hover {
+            background-color: #e8e8e8;
+        }
+
+        .p-header {
+            padding: 40px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .p-content-left {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-title {
+            font-size: clamp(24px, 4vw, 50px);
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+
+        .p-tags {
+            font-size: 14px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .p-icon {
+            font-size: 30px;
+            color: #111;
+            transition: transform 0.4s ease;
+        }
+
+        /* The hidden details part */
+        .p-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        }
+
+        .p-details-inner {
+            padding-bottom: 40px;
+            padding-right: 20px;
+            color: #444;
+            font-size: 18px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .p-details-inner ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+        
+        .p-details-inner li {
+            margin-bottom: 10px;
+        }
+
+        /* Active State for Project */
+        .project-item.active .p-icon {
+            transform: rotate(45deg); /* Rotates the + to x */
+        }
+        
+        .project-item.active .p-details {
+            max-height: 500px;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        /* --- EDUCATION --- */
+        .edu-wrapper {
+            display: flex;
+            gap: 60px;
+        }
+
+        .edu-left {
+            flex: 1;
+        }
+
+        .edu-left h2 {
+            font-size: clamp(40px, 5vw, 60px);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .edu-right {
+            flex: 1.5;
+        }
+
+        .accordion-item {
+            border-top: 1px solid #ccc;
+        }
+
+        .accordion-item:last-child {
+            border-bottom: 1px solid #ccc;
+        }
+
+        .accordion-header {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .acc-title {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .acc-icon {
+            font-size: 24px;
+            transition: transform 0.3s;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .accordion-content p {
+            padding-bottom: 30px;
+            color: #555;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        .accordion-item.active .acc-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* --- FOOTER --- */
+        .footer {
+            background: #111;
+            color: #fff;
+            padding: 100px 40px 40px;
+        }
+
+        .footer h2 {
+            font-size: clamp(40px, 8vw, 90px);
+            line-height: 1;
+            margin-bottom: 80px;
+            max-width: 1000px;
+            font-weight: 400;
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-top: 1px solid #333;
+            padding-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-contact a {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .footer-socials a {
+            margin-left: 20px;
+            color: #888;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .footer-socials a:hover {
+            color: #fff;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .edu-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="nav">
+                <div class="logo">PORTFOLIO</div>
+                <div class="contact-link"><a href="#contact">Get in Touch</a></div>
+            </div>
+            
+            <div class="hero-main">
+                <h1 class="big-title">ROHAN SUNIL<br></h1>
+                
+                <div class="hero-sub">
+                    <div class="hero-desc">
+                        <span class="job-title-highlight">(AWS Cloud & DevOps Engineer)</span>
+                        Deploying scalable, secure infrastructure on AWS and managing automated CI/CD pipelines.
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#contact" class="cta-btn">Drop me a line</a>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/rohansunil07" target="_blank">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <section class="section-padding container">
+        <h2 class="services-header">I can help you with ...</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <h3>01</h3>
+                <h4>AWS Infrastructure</h4>
+                <p>Designing secure 2-tier and 3-tier architectures using EC2, VPC, IAM, RDS, S3, and CloudWatch.</p>
+            </div>
+            <div class="service-item">
+                <h3>02</h3>
+                <h4>DevOps & CI/CD</h4>
+                <p>Automating deployment pipelines with Jenkins, Git, Docker, and using Terraform for Infrastructure as Code.</p>
+            </div>
+            <div class="service-item">
+                <h3>03</h3>
+                <h4>Linux Administration</h4>
+                <p>System configuration, Bash scripting, SSH management, and web server setup (Apache/Nginx) on Linux environments.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding container projects-section">
+        <div class="project-header-row">
+            <h2>Selected Work</h2>
+            <span>(Click to view details)</span>
+        </div>
+
+        <div class="project-list">
+            
+            <div class="project-item">
+                <div class="p-header">
+                    <div class="p-content-left">
+                        <div class="p-title">AWS 2-Tier Deployment</div>
+                        <span class="p-tags">Terraform, RDS, VPC, EC2</span>
+                    </div>
+                    <div class="p-icon">+</div>
+                </div>
+                <div class="p-details">
+                    <div class="p-details-inner">
+                        <ul>
+                            <li>Deployed EC2 frontend with RDS backend using Terraform</li>
+                            <li>Automated VPC, subnets, routing tables, security groups, and IAM</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="p-header">
+                    <div class="p-content-left">
+                        <div class="p-title">Auto Scaling Web App</div>
+                        <span class="p-tags">Load Balancer, ASG, High Availability</span>
+                    </div>
+                    <div class="p-icon">+</div>
+                </div>
+                <div class="p-details">
+                    <div class="p-details-inner">
+                        <ul>
+                            <li>Hosted login-based web application on EC2</li>
+                            <li>Configured Application Load Balancer (ALB) and Auto Scaling Group</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="p-header">
+                    <div class="p-content-left">
+                        <div class="p-title">Ansible Apache Automation</div>
+                        <span class="p-tags">Ansible, Apache, Linux</span>
+                    </div>
+                    <div class="p-icon">+</div>
+                </div>
+                <div class="p-details">
+                    <div class="p-details-inner">
+                        <ul>
+                            <li>Automated installation and configuration of Apache web server on EC2 using Ansible</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-item">
+                <div class="p-header">
+                    <div class="p-content-left">
+                        <div class="p-title">Serverless File Tracker</div>
+                        <span class="p-tags">Lambda, DynamoDB, S3, CloudWatch</span>
+                    </div>
+                    <div class="p-icon">+</div>
+                </div>
+                <div class="p-details">
+                    <div class="p-details-inner">
+                        <ul>
+                            <li>Built serverless file tracking solution using AWS Lambda, DynamoDB, S3, and CloudWatch</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+             <div class="project-item">
+                <div class="p-header">
+                    <div class="p-content-left">
+                        <div class="p-title">Dockerized Deployment</div>
+                        <span class="p-tags">Docker Compose, Containers, CI/CD</span>
+                    </div>
+                    <div class="p-icon">+</div>
+                </div>
+                <div class="p-details">
+                    <div class="p-details-inner">
+                        <ul>
+                            <li>Containerized web application using Docker</li>
+                            <li>Created optimized, production-ready Dockerfiles</li>
+                            <li>Used Docker Compose for multi-container setup (App + Database)</li>
+                            <li>Pushed Docker images to Docker Hub for CI/CD integration</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section-padding container">
+        <div class="edu-wrapper">
+            <div class="edu-left">
+                <h2>Education</h2>
+                <p>My academic background in Computer Science.</p>
+            </div>
+            <div class="edu-right">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="acc-title">01. B.E - Computer Science</span>
+                        <span class="acc-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Nandha Engineering College (2021-2025)</strong><br>
+                        Focus on Computer Science fundamentals, Algorithms, and Cloud technologies.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span class="acc-title">02. Diploma in Computer Science</span>
+                        <span class="acc-icon">+</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p><strong>Al-Ameen Polytechnic College (2018-2021)</strong><br>
+                        Foundation in hardware, networking, and programming logic.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer" id="contact">
+        <h2>Let's talk about a project, collaboration or an idea you may have</h2>
+        <div class="footer-bottom">
+            <div class="footer-contact">
+                <a href="mailto:rohansunil144@gmail.com">rohansunil144@gmail.com</a>
+                <a href="tel:8148025867">+91 8148025867</a>
+                <span style="display:block; color:#666; font-size: 14px; margin-top:10px;">Coimbatore, India</span>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.linkedin.com/in/rohansunil07" target="_blank">LinkedIn</a>
+                <a href="#">Back to Top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- PROJECTS ACCORDION LOGIC ---
+        const projectItems = document.querySelectorAll('.project-item');
+
+        projectItems.forEach(item => {
+            // Listen for click on the whole item header area
+            item.addEventListener('click', () => {
+                const details = item.querySelector('.p-details');
+                
+                // Toggle active class
+                item.classList.toggle('active');
+
+                // Adjust Height for smooth transition
+                if (item.classList.contains('active')) {
+                    // Set height to content height
+                    details.style.maxHeight = details.scrollHeight + "px";
+                } else {
+                    // Reset to 0
+                    details.style.maxHeight = 0;
+                }
+
+                // Optional: Close other projects when one opens (Accordion style)
+                projectItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.p-details').style.maxHeight = 0;
+                    }
+                });
+            });
+        });
+
+        // --- EDUCATION ACCORDION LOGIC ---
+        const eduHeaders = document.querySelectorAll('.accordion-header');
+
+        eduHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const content = header.nextElementSibling;
+                
+                item.classList.toggle('active');
+
+                if (item.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } else {
+                    content.style.maxHeight = 0;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
