@@ -2,551 +2,431 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rohan Sunil - DevOps Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rohan Sunil | Cloud & DevOps Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* --- RESET & BASE STYLES --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* --- 1. VARIABLES --- */
+        :root {
+            --bg-color: #0d0d0d;
+            --card-bg: #161616;
+            --card-hover: #1f1f1f;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --accent: #FF4C29;
+            --border: #333333;
+            --font-heading: 'Archivo Black', sans-serif;
+            --font-body: 'Inter', sans-serif;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            background-color: #f0f0f0;
-            color: #111;
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            line-height: 1.6;
             overflow-x: hidden;
+            width: 100%;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            cursor: pointer;
-        }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
 
-        ul {
-            list-style: none;
-        }
-
-        /* --- UTILITIES --- */
+        /* --- 2. LAYOUT --- */
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 20px;
+            width: 100%;
         }
 
-        .section-padding {
-            padding: 100px 0;
-        }
+        .section { padding: 100px 0; }
 
-        /* --- HERO SECTION --- */
-        header {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding-top: 40px;
-        }
-
-        .nav {
+        /* --- 3. NAVIGATION --- */
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(13, 13, 13, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 999;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
-        .hero-main {
-            margin-bottom: 60px;
-        }
+        .logo { font-family: var(--font-heading); font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
 
-        /* Large Title - Responsive */
-        h1.big-title {
-            font-size: clamp(50px, 13vw, 200px); 
-            line-height: 0.9;
-            letter-spacing: -0.04em;
-            font-weight: 500;
-            text-transform: uppercase;
-            word-wrap: break-word; /* Prevents overflow on tiny screens */
-        }
+        .nav-links { display: flex; gap: 40px; }
+        .nav-links a { font-weight: 600; font-size: 0.9rem; text-transform: uppercase; color: var(--text-muted); }
+        .nav-links a:hover { color: white; }
 
-        .hero-sub {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-top: 50px;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
+        .menu-btn { display: none; font-size: 1.5rem; color: white; cursor: pointer; }
 
-        .hero-desc {
-            max-width: 600px;
-            font-size: 24px;
-            font-weight: 400;
-            line-height: 1.4;
-        }
-        
-        .job-title-highlight {
-            display: block;
-            font-weight: 600;
-            color: #555;
-            margin-bottom: 15px;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            background: #111;
-            color: #fff;
-            padding: 15px 35px;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: transform 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .social-links {
-            margin-top: 20px;
-        }
-
-        .social-links a {
-            margin-right: 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-            border-bottom: 1px solid transparent;
-            transition: border 0.3s;
-        }
-
-        .social-links a:hover {
-            border-bottom: 1px solid #111;
-        }
-
-        /* --- SERVICES GRID --- */
-        .services-header {
-            font-size: clamp(30px, 4vw, 50px);
-            margin-bottom: 60px;
-            font-weight: 400;
-        }
-
-        .services-grid {
+        /* --- 4. HERO SECTION (BIGGER & BETTER) --- */
+        .hero {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            border-top: 1px solid #ccc;
-            padding-top: 40px;
-        }
-
-        .service-item h3 {
-            font-size: 60px;
-            color: #ccc;
-            margin-bottom: 20px;
-            font-weight: 300;
-        }
-
-        .service-item h4 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            font-weight: 500;
-        }
-
-        .service-item p {
-            font-size: 16px;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        /* --- PROJECTS SECTION --- */
-        .project-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #111;
-            padding-bottom: 20px;
-        }
-
-        .project-header-row h2 {
-            font-size: clamp(30px, 4vw, 50px);
-            font-weight: 400;
-        }
-
-        .project-item {
-            border-bottom: 1px solid #ccc;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            -webkit-tap-highlight-color: transparent; /* Removes blue highlight on mobile tap */
-        }
-
-        .project-item:hover {
-            background-color: #e8e8e8;
-        }
-
-        .p-header {
-            padding: 40px 0;
-            display: flex;
-            justify-content: space-between;
+            grid-template-columns: 1fr 1fr; /* Equal split for desktop */
             align-items: center;
+            min-height: 90vh; /* Taller hero */
+            gap: 20px;
+            padding-top: 20px;
+            position: relative;
         }
 
-        .p-content-left {
+        .hero-content { z-index: 10; }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 4.5rem;
+            line-height: 1;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            word-wrap: break-word;
+        }
+
+        .hero-content h1 span { -webkit-text-stroke: 2px var(--accent); color: transparent; }
+        .hero-content p { color: var(--text-muted); margin-bottom: 40px; max-width: 500px; font-size: 1.2rem; }
+
+        .stats { display: flex; gap: 40px; }
+        .stat-item h3 { font-family: var(--font-heading); font-size: 2.5rem; }
+        .stat-item p { font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); }
+
+        /* --- 3D SCENE STAGE --- */
+        .hero-visual {
+            position: relative;
+            height: 600px; /* Taller area for desktop */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1200px; /* Deep perspective */
+        }
+
+        /* The Background Glow */
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 76, 41, 0.15) 0%, rgba(0,0,0,0) 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* The Card Container */
+        .tilt-container {
+            position: relative;
+            width: 380px; /* MUCH BIGGER DESKTOP WIDTH */
+            height: 480px; /* MUCH BIGGER DESKTOP HEIGHT */
+            transform-style: preserve-3d;
+            transition: transform 0.1s cubic-bezier(0.2, 0, 0.2, 1);
+            z-index: 5;
+            cursor: pointer;
+        }
+
+        /* Common Card Style */
+        .visual-card {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #222 0%, #111 100%);
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backface-visibility: hidden;
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .card-front { z-index: 2; transform: translateZ(20px); }
+        .card-back { 
+            z-index: 1; 
+            transform: translateZ(-50px) scale(0.85) translateX(40px); /* Stacks behind */
+            opacity: 0.4;
+            background: #0f0f0f;
+            border-color: #333;
+        }
+
+        .visual-card i { 
+            font-size: 6rem; /* Bigger Icon */
+            color: var(--accent); 
+            margin-bottom: 20px; 
+            transform: translateZ(40px);
+            text-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        
+        .visual-card h4 { 
+            font-family: var(--font-heading); 
+            font-size: 2rem; 
+            text-transform: uppercase;
+            transform: translateZ(30px); 
+        }
+
+        /* Floating Tech Icons (Orbit System) */
+        .orbit-icon {
+            position: absolute;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: #888;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            z-index: 2; /* Some in front, some behind via JS/CSS */
+            transition: transform 0.1s ease-out;
+        }
+
+        /* Positions for orbit icons relative to center */
+        .orbit-1 { top: 10%; right: 10%; transform: translateZ(-20px); }
+        .orbit-2 { bottom: 15%; left: 0%; transform: translateZ(50px); z-index: 6; }
+        .orbit-3 { top: 40%; left: -15%; transform: translateZ(-60px); opacity: 0.7; }
+        .orbit-4 { bottom: 30%; right: -10%; transform: translateZ(30px); z-index: 6; }
+
+        /* Animation State: Shifting */
+        .shift-out {
+            transform: translateX(120%) rotate(15deg) !important;
+            opacity: 0 !important;
+        }
+
+        /* --- 5. PROJECTS GRID --- */
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-family: var(--font-heading); font-size: 3rem; text-transform: uppercase; }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: 0.3s;
             display: flex;
             flex-direction: column;
         }
 
-        .p-title {
-            font-size: clamp(20px, 4vw, 50px);
-            font-weight: 400;
-            margin-bottom: 10px;
-            padding-right: 15px;
-        }
+        .project-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
-        .p-tags {
-            font-size: 14px;
-            color: #666;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .p-icon {
-            font-size: 30px;
-            color: #111;
-            transition: transform 0.4s ease;
-            min-width: 30px; /* Prevents icon from squishing */
-            text-align: right;
-        }
-
-        .p-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-        }
-
-        .p-details-inner {
-            padding-bottom: 40px;
-            padding-right: 20px;
-            color: #444;
-            font-size: 18px;
-            line-height: 1.6;
-            max-width: 800px;
-        }
-
-        .p-details-inner ul {
-            list-style: disc;
-            padding-left: 20px;
-        }
-        
-        .p-details-inner li {
-            margin-bottom: 10px;
-        }
-
-        .project-item.active .p-icon {
-            transform: rotate(45deg);
-        }
-        
-        .project-item.active .p-details {
-            max-height: 1000px; /* Increased for mobile text wrapping */
-            transition: max-height 0.5s ease-in-out;
-        }
-
-        /* --- EDUCATION --- */
-        .edu-wrapper {
+        .project-icon {
+            height: 180px;
+            background: linear-gradient(180deg, #1a1a1a, #111);
             display: flex;
-            gap: 60px;
-        }
-
-        .edu-left {
-            flex: 1;
-        }
-
-        .edu-left h2 {
-            font-size: clamp(40px, 5vw, 60px);
-            line-height: 1.1;
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-
-        .edu-right {
-            flex: 1.5;
-        }
-
-        .accordion-item {
-            border-top: 1px solid #ccc;
-        }
-
-        .accordion-item:last-child {
-            border-bottom: 1px solid #ccc;
-        }
-
-        .accordion-header {
-            padding: 30px 0;
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-muted);
         }
 
-        .acc-title {
-            font-size: 20px;
-            font-weight: 500;
-        }
+        .project-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-title { font-family: var(--font-heading); font-size: 1.3rem; margin-bottom: 10px; text-transform: uppercase; }
+        .project-desc { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; }
+        .tech-stack { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; }
+        .tech-tag { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; background: #222; color: #ccc; border: 1px solid #333; }
 
-        .acc-icon {
-            font-size: 24px;
-            transition: transform 0.3s;
-        }
+        /* --- 6. SKILLS & EDUCATION --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .skill-card { background: var(--card-bg); padding: 30px; border-radius: 20px; border: 1px solid var(--border); text-align: center; }
+        .skill-icon { font-size: 2.5rem; margin-bottom: 20px; color: white; }
+        .skill-title { font-family: var(--font-heading); margin-bottom: 15px; text-transform: uppercase; }
+        .skill-list { color: var(--text-muted); font-size: 0.9rem; line-height: 1.8; }
 
-        .accordion-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-        }
+        .education-block { background: var(--card-bg); padding: 40px; border-radius: 20px; border: 1px solid var(--border); }
+        .edu-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #333; }
+        .edu-item:last-child { border-bottom: none; }
+        .edu-details h4 { font-weight: 700; color: white; }
+        .edu-details span { color: var(--text-muted); font-size: 0.9rem; }
+        .edu-year { font-family: var(--font-heading); color: var(--accent); }
 
-        .accordion-content p {
-            padding-bottom: 30px;
-            color: #555;
-            line-height: 1.6;
-            font-size: 16px;
-        }
+        /* --- 7. FOOTER CTA --- */
+        .cta-container { background: white; color: black; padding: 60px 20px; border-radius: 30px; text-align: center; margin-top: 40px; }
+        .cta-container h2 { font-family: var(--font-heading); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 10px; }
+        .cta-btn { display: inline-block; background: black; color: white; padding: 15px 40px; border-radius: 50px; font-weight: 600; margin-top: 20px; }
+        
+        footer { text-align: center; padding: 40px 0; color: var(--text-muted); }
+        .social-icons a { font-size: 1.5rem; margin: 0 10px; color: white; }
 
-        .accordion-item.active .acc-icon {
-            transform: rotate(45deg);
+        /* --- 8. MOBILE OPTIMIZATIONS (Safety Logic) --- */
+        @media (max-width: 900px) {
+            .container { padding: 0 25px; } 
+            
+            /* Stack Hero */
+            .hero { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+            
+            /* Shrink Font */
+            .hero-content h1 { font-size: 3rem; }
+            .hero-content p { font-size: 1rem; margin-bottom: 30px; }
+            .stats { justify-content: center; gap: 30px; }
+            
+            /* Shrink & Contain 3D Elements for Mobile */
+            .hero-visual { height: 350px; perspective: 800px; }
+            .tilt-container { width: 260px; height: 340px; }
+            .visual-card h4 { font-size: 1.5rem; }
+            .visual-card i { font-size: 4rem; }
+            
+            /* Hide orbits on mobile to avoid clutter/edge cutting */
+            .orbit-icon { display: none; }
+            .ambient-glow { width: 250px; height: 250px; }
+
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .edu-item { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .nav-links { display: none; }
+            .menu-btn { display: block; }
+            .cta-container h2 { font-size: 1.8rem; }
         }
         
-        /* --- FOOTER --- */
-        .footer {
-            background: #111;
-            color: #fff;
-            padding: 100px 40px 40px;
-        }
-
-        .footer h2 {
-            font-size: clamp(36px, 8vw, 90px);
-            line-height: 1;
-            margin-bottom: 80px;
-            max-width: 1000px;
-            font-weight: 400;
-        }
-
-        .footer-bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px solid #333;
-            padding-top: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .footer-contact a {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .footer-socials a {
-            margin-left: 20px;
-            color: #888;
-            font-size: 14px;
-            text-transform: uppercase;
-        }
-
-        .footer-socials a:hover {
-            color: #fff;
-        }
-
-        /* --- MOBILE OPTIMIZATION --- */
-        @media (max-width: 900px) {
-            .container {
-                padding: 0 25px; /* Reduce padding on phones so text isn't squished */
-            }
-            
-            header {
-                min-height: auto;
-                padding-bottom: 60px;
-            }
-
-            .hero-sub {
-                flex-direction: column; /* Stack description under title */
-                gap: 30px;
-            }
-            
-            .hero-desc {
-                font-size: 20px; /* Slightly smaller reading text */
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr; /* Stack services */
-            }
-            
-            .edu-wrapper {
-                flex-direction: column; /* Stack education */
-                gap: 30px;
-            }
-            
-            .footer {
-                padding: 60px 25px 30px;
-            }
-            
-            .footer-bottom {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .footer-socials a {
-                margin-left: 0;
-                margin-right: 20px;
-            }
-        }
+        .hidden { opacity: 0; transform: translateY(30px); transition: 0.6s ease-out; }
+        .show { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <header>
-            <div class="nav">
-                <div class="logo">PORTFOLIO</div>
-                <div class="contact-link"><a href="#contact">Get in Touch</a></div>
+        <nav>
+            <div class="logo">ROHAN<span>.SUNIL</span></div>
+            <div class="nav-links">
+                <a href="#projects">Work</a>
+                <a href="#skills">Skills</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
             </div>
-            
-            <div class="hero-main">
-                <h1 class="big-title"><br>ROHANSUNIL</h1>
-                
-                <div class="hero-sub">
-                    <div class="hero-desc">
-                        <span class="job-title-highlight">AWS Cloud & DevOps Engineer</span>
-                        I am an aspiring AWS Cloud and DevOps Engineer with hands-on experience in building and managing cloud infrastructure on AWS. I have worked with services like EC2, VPC, IAM, RDS, S3, and CloudWatch. I enjoy automating deployments using Git, Jenkins, Docker, Terraform, and Ansible. I am passionate about learning, scalability, and building reliable cloud solutions.
-                    </div>
-                    <div class="hero-actions">
-                        <a href="#contact" class="cta-btn">Drop me a line</a>
-                    </div>
-                </div>
-            </div>
-        </header>
+            <div class="menu-btn"><i class="fas fa-bars"></i></div>
+        </nav>
     </div>
 
-    <section class="section-padding container">
-        <h2 class="services-header">I can help you with ...</h2>
-        <div class="services-grid">
-            <div class="service-item">
-                <h3>01</h3>
-                <h4>AWS Infrastructure</h4>
-                <p>Designing secure 2-tier and 3-tier architectures using EC2, VPC, IAM, RDS, S3, and CloudWatch.</p>
+    <section class="container section">
+        <div class="hero">
+            <div class="hero-content hidden">
+                <h1>ROHAN<br><span>SUNIL Cloud</span><br>&DevOps Engineer</h1>
+                <p>Hi, I'm Rohan. Cloud&DevOps Engineer helping companies build reliable, automated AWS infrastructure.</p>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <h3>5</h3>
+                        <p>Projects</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1</h3>
+                        <p>Year of Learning</p>
+                    </div>
+                </div>
             </div>
-            <div class="service-item">
-                <h3>02</h3>
-                <h4>DevOps & CI/CD</h4>
-                <p>Automating deployment pipelines with Jenkins, Git, Docker, and using Terraform for Infrastructure as Code.</p>
-            </div>
-            <div class="service-item">
-                <h3>03</h3>
-                <h4>Linux Administration</h4>
-                <p>System configuration, Bash scripting, SSH management, and web server setup (Apache/Nginx) on Linux environments.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-padding container projects-section">
-        <div class="project-header-row">
-            <h2>Selected Work</h2>
-            <span>(Click/Tap to view)</span>
-        </div>
-
-        <div class="project-list">
             
-            <div class="project-item">
-                <div class="p-header">
-                    <div class="p-content-left">
-                        <div class="p-title">AWS 2-Tier Deployment</div>
-                        <span class="p-tags">Terraform, RDS, VPC, EC2</span>
+            <div class="hero-visual hidden" id="sceneStage">
+                
+                <div class="ambient-glow"></div>
+
+                <div class="orbit-icon orbit-1" data-speed="2"><i class="fab fa-linux"></i></div>
+                <div class="orbit-icon orbit-2" data-speed="-1.5"><i class="fab fa-jenkins"></i></div>
+                <div class="orbit-icon orbit-3" data-speed="1"><i class="fab fa-python"></i></div>
+                <div class="orbit-icon orbit-4" data-speed="-2"><i class="fas fa-terminal"></i></div>
+
+                <div class="tilt-container" id="tiltContainer">
+                    
+                    <div class="visual-card card-front" id="activeCard">
+                        <i class="fab fa-aws"></i>
+                        <h4>AWS Cloud</h4>
                     </div>
-                    <div class="p-icon">+</div>
+                    
+                    <div class="visual-card card-back" id="nextCard">
+                        <i class="fab fa-Docker"></i>
+                        <h4>Docker</h4>
+                    </div>
+
                 </div>
-                <div class="p-details">
-                    <div class="p-details-inner">
-                        <ul>
-                            <li>Deployed EC2 frontend with RDS backend using Terraform</li>
-                            <li>Automated VPC, subnets, routing tables, security groups, and IAM</li>
-                        </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container section">
+        <div class="section-header hidden">
+            <h2>Selected Work</h2>
+        </div>
+        
+        <div class="projects-grid">
+            
+            <div class="project-card hidden">
+                <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+                <div class="project-content">
+                    <h3 class="project-title">AWS 2-Tier Architecture</h3>
+                    <p class="project-desc">Deployed a secure EC2 frontend with RDS backend using Terraform. Automated VPC & Security Groups.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Terraform</span>
+                        <span class="tech-tag">AWS EC2</span>
+                        <span class="tech-tag">RDS</span>
                     </div>
                 </div>
             </div>
 
-            <div class="project-item">
-                <div class="p-header">
-                    <div class="p-content-left">
-                        <div class="p-title">Auto Scaling Web App</div>
-                        <span class="p-tags">Load Balancer, ASG, HA</span>
-                    </div>
-                    <div class="p-icon">+</div>
-                </div>
-                <div class="p-details">
-                    <div class="p-details-inner">
-                        <ul>
-                            <li>Hosted login-based web application on EC2</li>
-                            <li>Configured Application Load Balancer (ALB) and Auto Scaling Group</li>
-                        </ul>
+            <div class="project-card hidden">
+                <div class="project-icon"><i class="fas fa-server"></i></div>
+                <div class="project-content">
+                    <h3 class="project-title">Auto Scaling Web App</h3>
+                    <p class="project-desc">Hosted high-availability app with Application Load Balancer (ALB) and Auto Scaling Groups.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">ALB</span>
+                        <span class="tech-tag">Auto Scaling</span>
+                        <span class="tech-tag">EC2</span>
                     </div>
                 </div>
             </div>
 
-            <div class="project-item">
-                <div class="p-header">
-                    <div class="p-content-left">
-                        <div class="p-title">Ansible Apache Automation</div>
-                        <span class="p-tags">Ansible, Apache, Linux</span>
-                    </div>
-                    <div class="p-icon">+</div>
-                </div>
-                <div class="p-details">
-                    <div class="p-details-inner">
-                        <ul>
-                            <li>Automated installation and configuration of Apache web server on EC2 using Ansible</li>
-                        </ul>
+            <div class="project-card hidden">
+                <div class="project-icon"><i class="fab fa-docker"></i></div>
+                <div class="project-content">
+                    <h3 class="project-title">Dockerized Deployment</h3>
+                    <p class="project-desc">Containerized web app using Docker. Optimized Dockerfiles and used Docker Compose for orchestration.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Docker</span>
+                        <span class="tech-tag">Compose</span>
+                        <span class="tech-tag">CI/CD</span>
                     </div>
                 </div>
             </div>
 
-            <div class="project-item">
-                <div class="p-header">
-                    <div class="p-content-left">
-                        <div class="p-title">Serverless File Tracker</div>
-                        <span class="p-tags">Lambda, DynamoDB, S3</span>
-                    </div>
-                    <div class="p-icon">+</div>
-                </div>
-                <div class="p-details">
-                    <div class="p-details-inner">
-                        <ul>
-                            <li>Built serverless file tracking solution using AWS Lambda, DynamoDB, S3, and CloudWatch</li>
-                        </ul>
+             <div class="project-card hidden">
+                <div class="project-icon"><i class="fas fa-code-branch"></i></div>
+                <div class="project-content">
+                    <h3 class="project-title">Serverless Tracking</h3>
+                    <p class="project-desc">Serverless file tracking solution utilizing AWS Lambda, DynamoDB, S3, and CloudWatch.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Lambda</span>
+                        <span class="tech-tag">DynamoDB</span>
+                        <span class="tech-tag">S3</span>
                     </div>
                 </div>
             </div>
 
-             <div class="project-item">
-                <div class="p-header">
-                    <div class="p-content-left">
-                        <div class="p-title">Dockerized Deployment</div>
-                        <span class="p-tags">Docker, Containers, CI/CD</span>
-                    </div>
-                    <div class="p-icon">+</div>
-                </div>
-                <div class="p-details">
-                    <div class="p-details-inner">
-                        <ul>
-                            <li>Containerized web application using Docker</li>
-                            <li>Created optimized, production-ready Dockerfiles</li>
-                            <li>Used Docker Compose for multi-container setup (App + Database)</li>
-                            <li>Pushed Docker images to Docker Hub for CI/CD integration</li>
-                        </ul>
+             <div class="project-card hidden">
+                <div class="project-icon"><i class="fas fa-terminal"></i></div>
+                <div class="project-content">
+                    <h3 class="project-title">Ansible Automation</h3>
+                    <p class="project-desc">Automated Apache web server configuration on EC2 instances using Ansible Playbooks.</p>
+                    <div class="tech-stack">
+                        <span class="tech-tag">Ansible</span>
+                        <span class="tech-tag">Apache</span>
+                        <span class="tech-tag">Linux</span>
                     </div>
                 </div>
             </div>
@@ -554,113 +434,181 @@
         </div>
     </section>
 
-    <section class="section-padding container">
-        <div class="edu-wrapper">
-            <div class="edu-left">
-                <h2>Education</h2>
-                <p>My academic background in Computer Science.</p>
+    <section id="skills" class="container section">
+        <div class="section-header hidden">
+            <h2>Technical Skills</h2>
+        </div>
+        <div class="skills-grid">
+            
+            <div class="skill-card hidden">
+                <div class="skill-icon"><i class="fab fa-aws"></i></div>
+                <h3 class="skill-title">AWS Cloud</h3>
+                <div class="skill-list">EC2, S3, VPC, IAM<br>RDS, Lambda, DynamoDB</div>
             </div>
-            <div class="edu-right">
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="acc-title">01. B.E - Computer Science</span>
-                        <span class="acc-icon">+</span>
-                    </div>
-                    <div class="accordion-content">
-                        <p><strong>Nandha Engineering College (2021-2025)</strong><br>
-                        Focus on Computer Science fundamentals, Algorithms, and Cloud technologies.</p>
-                    </div>
+
+            <div class="skill-card hidden">
+                <div class="skill-icon"><i class="fas fa-cogs"></i></div>
+                <h3 class="skill-title">DevOps</h3>
+                <div class="skill-list">Git, Docker, Jenkins<br>Terraform, Ansible</div>
+            </div>
+
+            <div class="skill-card hidden">
+                <div class="skill-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3 class="skill-title">Coding</h3>
+                <div class="skill-list">Python, Bash, HTML<br>Linux Administration</div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="container section">
+        <div class="section-header hidden">
+            <h2>Education</h2>
+        </div>
+        <div class="education-block hidden">
+            <div class="edu-item">
+                <div class="edu-details">
+                    <h4>B.E - Computer Science</h4>
+                    <span>Nandha Engineering College</span>
                 </div>
-                <div class="accordion-item">
-                    <div class="accordion-header">
-                        <span class="acc-title">02. Diploma in Computer Science</span>
-                        <span class="acc-icon">+</span>
-                    </div>
-                    <div class="accordion-content">
-                        <p><strong>Al-Ameen Polytechnic College (2018-2021)</strong><br>
-                        Foundation in hardware, networking, and programming logic.</p>
-                    </div>
+                <div class="edu-year">2021 – 2025</div>
+            </div>
+            <div class="edu-item">
+                <div class="edu-details">
+                    <h4>Diploma in Computer Science</h4>
+                    <span>Al-Ameen Polytechnic College</span>
                 </div>
+                <div class="edu-year">2018 – 2021</div>
             </div>
         </div>
     </section>
 
-    <footer class="footer" id="contact">
-        <h2>Let's talk about a project, collaboration or an idea you may have</h2>
-        <div class="footer-bottom">
-            <div class="footer-contact">
-                <a href="mailto:rohansunil144@gmail.com">rohansunil144@gmail.com</a>
-                <a href="tel:8148025867">+91 8148025867</a>
-                <span style="display:block; color:#666; font-size: 14px; margin-top:10px;">Coimbatore, India</span>
-            </div>
-            <div class="footer-socials">
-                <a href="https://www.linkedin.com/in/rohansunil07" target="_blank">LinkedIn</a>
-                <a href="#">Back to Top ↑</a>
-            </div>
+    <section id="contact" class="container">
+        <div class="cta-container hidden">
+            <h2>Let's Work Together</h2>
+            <p>Ready to optimize your infrastructure?</p>
+            <a href="mailto:rohansunil144@gmail.com" class="cta-btn">Contact Me</a>
         </div>
+    </section>
+
+    <footer>
+        <div class="social-icons">
+            <a href="http://www.linkedin.com/in/rohansunil07"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:rohansunil144@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="margin-top: 20px;">&copy; 2026 Rohan Sunil</p>
     </footer>
 
     <script>
-        // --- ACCORDION LOGIC (Works on Touch & Click) ---
+        // --- 1. MENU TOGGLE ---
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
         
-        // Helper function to handle accordion toggles
-        function toggleAccordion(element, contentClass) {
-            const content = element.nextElementSibling;
-            
-            // Toggle active class
-            element.parentElement.classList.toggle('active');
-
-            // Adjust Height
-            if (element.parentElement.classList.contains('active')) {
-                content.style.maxHeight = content.scrollHeight + "px";
+        menuBtn.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
             } else {
-                content.style.maxHeight = 0;
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.right = '20px';
+                navLinks.style.background = '#161616';
+                navLinks.style.padding = '30px';
+                navLinks.style.borderRadius = '15px';
+                navLinks.style.width = '200px';
+                navLinks.style.border = '1px solid #333';
             }
+        });
+
+        // --- 2. SCROLL ANIMATION ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
+
+        // --- 3. 3D CARD INTERACTIVITY & SHUFFLE ---
+        const skillsData = [
+            { icon: 'fab fa-aws', title: 'AWS Cloud' },
+            { icon: 'fab fa-docker', title: 'Docker' },
+            { icon: 'fas fa-server', title: 'Terraform' },
+            { icon: 'fab fa-linux', title: 'Linux' },
+            { icon: 'fab fa-python', title: 'Python' }
+        ];
+
+        let currentIndex = 0;
+        const activeCard = document.getElementById('activeCard');
+        const nextCard = document.getElementById('nextCard');
+        const tiltContainer = document.getElementById('tiltContainer');
+        const sceneStage = document.getElementById('sceneStage');
+        const orbitIcons = document.querySelectorAll('.orbit-icon');
+
+        // Shuffle Function
+        function shuffleCard() {
+            activeCard.classList.add('shift-out');
+
+            setTimeout(() => {
+                currentIndex = (currentIndex + 1) % skillsData.length;
+                const nextIndex = (currentIndex + 1) % skillsData.length;
+
+                activeCard.querySelector('i').className = skillsData[currentIndex].icon;
+                activeCard.querySelector('h4').textContent = skillsData[currentIndex].title;
+
+                nextCard.querySelector('i').className = skillsData[nextIndex].icon;
+                nextCard.querySelector('h4').textContent = skillsData[nextIndex].title;
+
+                activeCard.classList.remove('shift-out');
+            }, 600);
         }
 
-        // Projects
-        const projectItems = document.querySelectorAll('.project-item');
-        projectItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const details = item.querySelector('.p-details');
-                
-                // Toggle active
-                item.classList.toggle('active');
+        // Auto Shuffle
+        let shuffleInterval = setInterval(shuffleCard, 3000);
 
-                // Animate height
-                if (item.classList.contains('active')) {
-                    details.style.maxHeight = details.scrollHeight + "px";
-                } else {
-                    details.style.maxHeight = 0;
-                }
+        // Click to Shuffle
+        tiltContainer.addEventListener('click', () => {
+            clearInterval(shuffleInterval);
+            shuffleCard();
+            shuffleInterval = setInterval(shuffleCard, 3000);
+        });
 
-                // Close others (Optional, keeps it clean on mobile)
-                projectItems.forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
-                        otherItem.querySelector('.p-details').style.maxHeight = 0;
-                    }
-                });
+        // --- 4. 3D TILT & PARALLAX EFFECT (DESKTOP) ---
+        sceneStage.addEventListener('mousemove', (e) => {
+            const rect = sceneStage.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // 1. Tilt Main Card
+            const rotateX = (centerY - y) / 20;
+            const rotateY = (x - centerX) / 20;
+            tiltContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+            // 2. Parallax Floating Orbits (Move opposite to mouse)
+            orbitIcons.forEach((icon) => {
+                const speed = icon.getAttribute('data-speed');
+                const moveX = (x - centerX) * speed * 0.03;
+                const moveY = (y - centerY) * speed * 0.03;
+                icon.style.transform = `translate(${moveX}px, ${moveY}px)`;
             });
         });
 
-        // Education
-        const eduHeaders = document.querySelectorAll('.accordion-header');
-        eduHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const content = header.nextElementSibling;
-                
-                item.classList.toggle('active');
-                if (item.classList.contains('active')) {
-                    content.style.maxHeight = content.scrollHeight + "px";
-                } else {
-                    content.style.maxHeight = 0;
-                }
+        // Reset on Leave
+        sceneStage.addEventListener('mouseleave', () => {
+            tiltContainer.style.transform = `rotateX(0) rotateY(0)`;
+            orbitIcons.forEach(icon => {
+                icon.style.transform = `translate(0, 0)`;
             });
         });
+
     </script>
 </body>
 </html>
+
 
 
